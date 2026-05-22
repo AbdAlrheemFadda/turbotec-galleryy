@@ -1,0 +1,6 @@
+{
+  "name": "TurboTec Gallery",
+  "description": "High-performance automotive gallery with precision design and interactive inventory.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

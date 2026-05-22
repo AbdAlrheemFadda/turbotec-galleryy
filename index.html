@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TurboTec | Precision Motion</title>
+    <link rel="icon" type="image/webp" href="/iconn.webp" />
+    <script>
+      (function() {
+        if (typeof window !== 'undefined') {
+          // Fix global and process for libraries that expect them
+          window.global = window;
+          window.process = { env: {} };
+
+          // Fix for environments where properties are read-only getters
+          ['fetch', 'FormData', 'XMLHttpRequest'].forEach(prop => {
+            try {
+              const desc = Object.getOwnPropertyDescriptor(window, prop);
+              if (desc && desc.configurable && !desc.writable) {
+                Object.defineProperty(window, prop, {
+                  value: window[prop],
+                  writable: true,
+                  configurable: true,
+                  enumerable: true
+                });
+              }
+            } catch (e) {}
+          });
+
+          // Prevent polyfills (like formdata-polyfill) from running and crashing on read-only properties
+          if (typeof FormData !== 'undefined') {
+            const proto = FormData.prototype;
+            const dummy = function*() {};
+            if (!proto.keys) try { proto.keys = dummy; } catch (e) {}
+            if (!proto.entries) try { proto.entries = dummy; } catch (e) {}
+            if (!proto.values) try { proto.values = dummy; } catch (e) {}
+            if (!proto[Symbol.iterator]) try { proto[Symbol.iterator] = proto.entries || dummy; } catch (e) {}
+          }
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
